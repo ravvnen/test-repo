@@ -1,0 +1,8 @@
+item_id: logging.errors
+title: Error Logging Standard
+content: |
+  All caught errors MUST be logged with stack trace and correlation ID.
+  Do NOT log secrets or PII.
+labels:
+  - logging
+  - monitoring

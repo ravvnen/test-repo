@@ -1,0 +1,9 @@
+item_id: retry.policy
+title: Network Retry Policy
+content: |
+  Retry failed HTTP rquests up to 3 times with exponential backoff starting at 100ms.
+  Cap total retry at 2s.
+  
+labels:
+  - network
+  - error-handling

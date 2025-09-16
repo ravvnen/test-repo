@@ -1,0 +1,8 @@
+item_id: api.auth
+title: API Authentication Standard
+content: |
+  All API endpoints MUST use OAuth2 with bearer tokens.
+  Reject anonymous requests with HTTP 401.
+labels:
+  - api
+  - security
