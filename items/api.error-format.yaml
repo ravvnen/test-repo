@@ -1,0 +1,17 @@
+item_id: api.error-format
+title: API Error Response Format
+content: |
+  Error responses MUST use JSON body:
+    {
+      "error": {
+        "code": "machine_readable_code",
+        "message": "Human friendly explanation",
+        "correlation_id": "<uuid>",
+        "details": [ { "field": "path", "issue": "description" } ]
+      }
+    }
+  The correlation_id MUST match the logged trace context.
+labels:
+  - api
+  - errors
+  - observability

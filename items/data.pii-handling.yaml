@@ -1,0 +1,10 @@
+item_id: data.pii-handling
+title: PII Handling Standard
+content: |
+  PII fields MUST be classified and tagged. Access MUST be restricted via least
+  privilege roles. PII MUST NOT appear in logs, metrics, or traces. Mask or hash
+  where partial display is needed (e.g. last 4). Encryption in transit & rest required.
+labels:
+  - data
+  - privacy
+  - security

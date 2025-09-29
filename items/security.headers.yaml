@@ -1,0 +1,11 @@
+item_id: security.headers
+title: Security HTTP Headers
+content: |
+  Public web endpoints MUST set the following headers unless explicitly waived:
+    Content-Security-Policy, X-Content-Type-Options=nosniff,
+    X-Frame-Options=DENY, Referrer-Policy=strict-origin-when-cross-origin,
+    Permissions-Policy (principle of least privilege), Strict-Transport-Security.
+labels:
+  - security
+  - web
+  - hardening

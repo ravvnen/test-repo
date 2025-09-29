@@ -1,0 +1,10 @@
+item_id: security.dependency-scanning
+title: Dependency Vulnerability Scanning
+content: |
+  All builds MUST run automated dependency scanning (e.g. Snyk, Dependabot,
+  osv-scanner). Critical or high vulnerabilities MUST be remediated or waived
+  (with documented rationale) before release. Pin versions to avoid supply chain drift.
+labels:
+  - security
+  - dependencies
+  - supply-chain

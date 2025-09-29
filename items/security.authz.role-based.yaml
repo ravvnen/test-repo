@@ -1,0 +1,11 @@
+item_id: security.authz.role-based
+title: Role-Based Authorization Standard
+content: |
+  Authorization MUST be enforced server-side using centralized policy (e.g. ABAC
+  or RBAC service). Clients MUST NOT rely solely on hidden UI elements to prevent
+  access. Authorization decisions MUST be auditable with subject, action,
+  resource, decision, and timestamp.
+labels:
+  - security
+  - authorization
+  - compliance

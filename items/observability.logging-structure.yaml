@@ -1,0 +1,10 @@
+item_id: observability.logging-structure
+title: Structured Logging Format
+content: |
+  Logs MUST be structured JSON with keys: timestamp (RFC3339), level, message,
+  service, correlation_id, span_id (if present), and context.* for domain fields.
+  Multi-line free-form stack traces MUST be captured in a single field.
+labels:
+  - observability
+  - logging
+  - structure

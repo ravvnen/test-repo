@@ -1,0 +1,10 @@
+item_id: config.environment-variables
+title: Environment Variable Convention
+content: |
+  Environment variables MUST use UPPER_SNAKE_CASE with service prefix if shared.
+  Secrets MUST NOT be supplied via .env committed files. Default values SHOULD
+  be documented in README or sample.env template.
+labels:
+  - configuration
+  - operations
+  - conventions

@@ -1,0 +1,10 @@
+item_id: cd.rollout-strategy
+title: Progressive Delivery Strategy
+content: |
+  Production changes SHOULD use progressive rollout (canary or blue/green).
+  Automated health checks MUST gate promotion beyond initial slice. Rollback
+  MUST be automated and under 5 minutes mean time.
+labels:
+  - cd
+  - reliability
+  - deployment

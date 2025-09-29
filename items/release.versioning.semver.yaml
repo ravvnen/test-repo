@@ -1,0 +1,10 @@
+item_id: release.versioning.semver
+title: Semantic Versioning Policy
+content: |
+  Libraries and SDKs MUST follow semver: MAJOR.MINOR.PATCH. Breaking API changes
+  increment MAJOR. Backwards-compatible additions increment MINOR. Bug fixes
+  increment PATCH. Pre-releases use -alpha.N, -beta.N, -rc.N.
+labels:
+  - release
+  - versioning
+  - governance

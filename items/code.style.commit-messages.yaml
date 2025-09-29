@@ -1,0 +1,10 @@
+item_id: code.style.commit-messages
+title: Commit Message Convention
+content: |
+  Commit messages MUST follow: <type>(<scope>): <subject> where type in
+  [feat, fix, refactor, docs, test, chore, perf, build, ci]. Subject in imperative
+  mood, <= 72 chars. Body MAY include rationale and breaking change footer.
+labels:
+  - git
+  - workflow
+  - quality

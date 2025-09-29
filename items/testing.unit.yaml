@@ -1,0 +1,10 @@
+item_id: testing.unit
+title: Unit Testing Requirement
+content: |
+  Pure functions and logic branches MUST have unit tests targeting >= 80% branch
+  coverage per module (exceptions allowed for generated code). Tests MUST avoid
+  network and real DB access; use fakes/mocks.
+labels:
+  - testing
+  - quality
+  - automation

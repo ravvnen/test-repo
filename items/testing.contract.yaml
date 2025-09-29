@@ -1,0 +1,10 @@
+item_id: testing.contract
+title: API Contract Testing
+content: |
+  Provider and consumer driven contract tests (e.g. Pact) SHOULD be implemented
+  for inter-service APIs with >1 distinct consumer. Contract failures MUST block
+  release unless explicitly waived.
+labels:
+  - testing
+  - api
+  - contracts

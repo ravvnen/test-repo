@@ -1,0 +1,11 @@
+item_id: security.encryption-in-transit
+title: TLS Enforcement Policy
+content: |
+  All external and internal service-to-service traffic MUST use TLS 1.2+.
+  Certificates MUST be issued by an approved CA and rotated automatically.
+  Plaintext protocols (HTTP, AMQP without TLS, raw Redis) MUST be wrapped or
+  tunneled. HSTS MUST be enabled for public web properties.
+labels:
+  - security
+  - transport
+  - tls

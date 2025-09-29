@@ -1,0 +1,11 @@
+item_id: perf.db.indexing
+title: Database Indexing Guideline
+content: |
+  Queries with sustained p95 latency > 2x target MUST be analyzed for missing
+  composite or covering indexes. Avoid over-indexing: write amplification over
+  20% indicates reevaluation. All indexes MUST be named using convention:
+  idx_<table>_<col1>_<col2>.
+labels:
+  - performance
+  - database
+  - indexing

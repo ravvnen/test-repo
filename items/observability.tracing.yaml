@@ -1,0 +1,11 @@
+item_id: observability.tracing
+title: Distributed Tracing Standard
+content: |
+  All inbound requests MUST start or continue a W3C trace-context trace. Every
+  outbound call MUST propagate trace headers. Spans SHOULD include stable
+  attributes not exceeding 20 distinct values per key. Sampling rates MUST be
+  centrally configurable. Error spans MUST capture status code and error type.
+labels:
+  - observability
+  - tracing
+  - diagnostics

@@ -1,0 +1,10 @@
+item_id: perf.async-io
+title: Asynchronous I/O Standard
+content: |
+  I/O bound services in supported runtimes (Node.js, .NET async, Python asyncio)
+  MUST use non-blocking primitives. Blocking calls in request path MUST be
+  isolated via worker threads or background jobs. p95 event loop lag target: < 50ms.
+labels:
+  - performance
+  - concurrency
+  - scalability

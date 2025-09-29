@@ -1,0 +1,10 @@
+item_id: reliability.bulkhead
+title: Bulkhead Isolation Guideline
+content: |
+  Critical resource pools (threads, connections) MUST be partitioned so noisy
+  neighbors cannot starve essential workloads. Pools MUST publish utilization
+  metrics (current, max, queued). Degradation strategies MAY shed non-critical load.
+labels:
+  - reliability
+  - resilience
+  - capacity

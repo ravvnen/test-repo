@@ -1,0 +1,10 @@
+item_id: config.feature-flags
+title: Feature Flag Usage
+content: |
+  Long-lived feature flags MUST be avoided; flags older than 90 days MUST be
+  reviewed and removed or justified. Flags MUST default to the safe/off state.
+  Configuration changes SHOULD be audited.
+labels:
+  - configuration
+  - rollout
+  - governance

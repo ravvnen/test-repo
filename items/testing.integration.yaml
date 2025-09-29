@@ -1,0 +1,10 @@
+item_id: testing.integration
+title: Integration Testing Guideline
+content: |
+  Critical service interactions (DB, queue, external API) MUST have integration
+  tests executed in CI against ephemeral or containerized dependencies. Flaky
+  tests MUST be quarantined within 24h.
+labels:
+  - testing
+  - integration
+  - reliability

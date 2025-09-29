@@ -1,0 +1,10 @@
+item_id: reliability.timeout
+title: Timeout Standard
+content: |
+  Every remote call MUST define an explicit timeout. Default service-to-service
+  timeout: 2s unless documented. Aggregate request timeout (client visible)
+  MUST be less than 95% of upstream gateway timeout budget.
+labels:
+  - reliability
+  - latency
+  - resilience

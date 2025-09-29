@@ -1,0 +1,11 @@
+item_id: security.input-validation
+title: Input Validation & Sanitization
+content: |
+  All external input MUST be validated at trust boundaries. Prefer allow-lists
+  over block-lists. Reject invalid payloads with 400 before any side effects.
+  Strings incorporated into SQL, shell, or HTML contexts MUST use parameterized
+  queries or context-appropriate escaping libraries.
+labels:
+  - security
+  - validation
+  - injection

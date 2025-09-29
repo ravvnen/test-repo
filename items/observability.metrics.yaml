@@ -1,0 +1,11 @@
+item_id: observability.metrics
+title: Metrics Naming & Cardinality
+content: |
+  All services MUST emit RED (Rate, Errors, Duration) and USE (Utilization,
+  Saturation, Errors) metrics where applicable. Metric names MUST follow:
+  service.component.metric_unit (snake_case). Label cardinality MUST be bounded;
+  avoid unbounded user IDs or free-form strings.
+labels:
+  - observability
+  - metrics
+  - monitoring

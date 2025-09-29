@@ -1,0 +1,10 @@
+item_id: docs.readme-standard
+title: README Minimum Content
+content: |
+  Each repository MUST include a README with sections: Overview, Getting Started,
+  Development (commands), Configuration, Testing, Release Process, Support.
+  Badges (build, coverage) SHOULD be present for active services.
+labels:
+  - documentation
+  - onboarding
+  - quality

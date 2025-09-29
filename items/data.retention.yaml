@@ -1,0 +1,10 @@
+item_id: data.retention
+title: Data Retention Policy
+content: |
+  Personally identifiable and customer-generated data MUST have explicit
+  retention periods documented. Data exceeding retention MUST be purged or
+  anonymized. Backups MUST respect deletion within 30 days.
+labels:
+  - data
+  - compliance
+  - privacy

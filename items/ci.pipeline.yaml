@@ -1,0 +1,10 @@
+item_id: ci.pipeline
+title: CI Pipeline Standard
+content: |
+  Pipelines MUST include stages: lint -> build -> unit tests -> security scan ->
+  package artifact. Parallelization SHOULD be applied where possible. Pipeline
+  definitions MUST be stored as code and changes reviewed.
+labels:
+  - ci
+  - automation
+  - governance

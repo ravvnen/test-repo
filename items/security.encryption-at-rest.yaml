@@ -1,0 +1,11 @@
+item_id: security.encryption-at-rest
+title: Encryption At Rest Standard
+content: |
+  All persistent data stores containing customer or sensitive data MUST use
+  encryption-at-rest (AES-256 or stronger). Encryption keys MUST be managed by
+  a centralized KMS with rotation not exceeding 365 days. Snapshots and backups
+  MUST inherit encryption settings.
+labels:
+  - security
+  - encryption
+  - data

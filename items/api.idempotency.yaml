@@ -1,0 +1,11 @@
+item_id: api.idempotency
+title: Idempotent Request Standard
+content: |
+  Unsafe (side-effecting) POST endpoints that create resources MUST support
+  idempotency via an Idempotency-Key header. The server MUST return the same
+  result for retried requests with identical key within a 24h window.
+  Idempotency keys MUST be opaque and treated as secrets in transit only.
+labels:
+  - api
+  - reliability
+  - safety

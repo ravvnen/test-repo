@@ -1,0 +1,15 @@
+item_id: api.pagination
+title: API Pagination Guideline
+content: |
+  Collection endpoints returning more than 50 items MUST implement pagination.
+  Cursor-based pagination SHOULD be preferred over offset when ordering by
+  non-unique or evolving fields. Responses MUST include:
+    - items: array of results
+    - page_info.next_cursor (nullable)
+    - page_info.previous_cursor (nullable)
+    - total_count (MAY be approximate for large datasets)
+  Clients MUST NOT rely on stable ordering unless documented.
+labels:
+  - api
+  - pagination
+  - performance

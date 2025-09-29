@@ -1,0 +1,10 @@
+item_id: iac.resource-naming
+title: Infrastructure Resource Naming
+content: |
+  Cloud resources MUST follow: <env>-<system>-<component>-<sequence>. Environments
+  use: dev|stg|prod. Names MUST be lowercase, hyphen separated, <= 32 chars where
+  provider allows. Random suffixes MAY be added for global uniqueness.
+labels:
+  - infrastructure
+  - iac
+  - conventions

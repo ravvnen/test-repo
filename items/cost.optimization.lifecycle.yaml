@@ -1,0 +1,10 @@
+item_id: cost.optimization.lifecycle
+title: Cost Optimization Lifecycle
+content: |
+  Services MUST tag resources with: owner, cost_center, environment, expiry (if temp).
+  Idle resources (<=5% utilization over 14d) MUST be rightsized or decommissioned.
+  Reserved or savings plans SHOULD be evaluated quarterly for steady workloads.
+labels:
+  - cost
+  - optimization
+  - operations

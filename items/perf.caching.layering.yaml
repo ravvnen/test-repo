@@ -1,0 +1,11 @@
+item_id: perf.caching.layering
+title: Caching Layer Strategy
+content: |
+  Apply multi-layer caching where beneficial: in-memory (per instance) -> shared
+  distributed cache -> CDN/edge. Cache keys MUST include all input dimensions.
+  Stale-while-revalidate MAY be used for non-critical freshness. Sensitive or
+  user-specific data MUST NOT be cached at shared layers.
+labels:
+  - performance
+  - caching
+  - architecture

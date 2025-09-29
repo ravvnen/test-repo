@@ -1,0 +1,11 @@
+item_id: reliability.circuit-breaker
+title: Circuit Breaker Policy
+content: |
+  Outbound calls to unstable dependencies SHOULD implement a circuit breaker.
+  Trip after >= 50% failures over rolling 20 requests with minimum volume 10.
+  Half-open probes MUST be limited and logged. Avoid cascading failures by
+  failing fast when open.
+labels:
+  - reliability
+  - resilience
+  - patterns

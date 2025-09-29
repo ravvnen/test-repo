@@ -1,0 +1,12 @@
+item_id: api.versioning
+title: API Versioning Standard
+content: |
+  Public APIs MUST be versioned using a prefix (e.g. /v1/) and MAY also support
+  content negotiation via Accept header (e.g. application/vnd.company.v1+json).
+  Breaking changes REQUIRE a new major version. Minor, backwards compatible
+  additions MAY be added within the same major version.
+  Sunset notices MUST be communicated at least 90 days prior to deprecation.
+labels:
+  - api
+  - versioning
+  - stability

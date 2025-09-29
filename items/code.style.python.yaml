@@ -1,0 +1,10 @@
+item_id: code.style.python
+title: Python Style Standard
+content: |
+  Python code MUST conform to PEP8 with max line length 120. Type hints SHOULD
+  be added for public functions. Formatting MUST be enforced via black + isort
+  in CI. Avoid wildcard imports.
+labels:
+  - coding-style
+  - python
+  - quality

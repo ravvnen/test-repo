@@ -1,0 +1,12 @@
+item_id: api.rate-limits
+title: API Rate Limiting Policy
+content: |
+  All authenticated API calls MUST be subject to rate limits. Standard default:
+  100 requests per minute per API key (subject to revision). Responses MUST set
+  the following headers:
+    X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After (when 429).
+  Clients MUST expect HTTP 429 and implement exponential backoff with jitter.
+labels:
+  - api
+  - reliability
+  - throttling
