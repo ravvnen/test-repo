@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Archetype Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+            color: #3A3A3A;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Palatino Linotype', Palatino, serif;
+            color: #2D2424;
+        }
+        
+        /* Intro Screen */
+        .intro-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            padding: 40px 20px;
+        }
+        
+        .intro-content {
+            max-width: 800px;
+            background: white;
+            border: 2px solid #9FB4B3;
+            border-radius: 8px;
+            padding: 48px;
+            box-shadow: 0 2px 12px rgba(45, 36, 36, 0.1);
+        }
+        
+        .intro-content h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #3A3A3A;
+            margin-bottom: 16px;
+        }
+        
+        .intro-highlights {
+            background: rgba(242, 235, 217, 0.3);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        
+        .intro-highlights h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #2D2424;
+        }
+        
+        .intro-highlights ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .intro-highlights li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #3A3A3A;
+        }
+        
+        .intro-highlights li:before {
+            content: "✓";
+            color: #C89B5E;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .start-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 32px auto 0;
+            padding: 16px 32px;
+            background: #C89B5E;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .start-btn:hover {
+            background: #B8895A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 155, 94, 0.3);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Card Quiz Container */
+        .card-quiz-section {
+            padding: 60px 20px;
+            background: transparent;
+        }
+        
+        .card-quiz-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card-quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .card-quiz-header h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+        
+        .card-quiz-header p {
+            font-size: 18px;
+            color: #3A3A3A;
+        }
+        
+        .cards-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        
+        .cards-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .quiz-card {
+            min-width: 100%;
+            background: white;
+            border: 2px solid #9FB4B3;
+            border-radius: 8px;
+            padding: 48px;
+            box-shadow: 0 2px 12px rgba(45, 36, 36, 0.1);
+        }
+        
+        .quiz-card.active {
+            border-color: #5E7A79;
+            border-width: 3px;
+        }
+        
+        .question-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #C89B5E;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Palatino Linotype', Palatino, serif;
+            font-size: 16px;
+            margin: 0 auto 24px;
+        }
+        
+        .card-question {
+            font-family: 'Palatino Linotype', Palatino, serif;
+            font-size: 24px;
+            color: #2D2424;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .chip-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .chip-btn {
+            padding: 12px 20px;
+            border: 1px solid #A6A6A6;
+            background: white;
+            color: #3A3A3A;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chip-btn:hover {
+            background: #F2EBD9;
+        }
+        
+        .chip-btn.selected {
+            background: #D4A89A;
+            border-color: #D4A89A;
+        }
+        
+        .pagination-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+        
+        .pagination-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #A6A6A6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-dot.active {
+            background: #C89B5E;
+            width: 24px;
+            border-radius: 4px;
+        }
+        
+        /* Result Card */
+        .result-card {
+            text-align: center;
+        }
+        
+        .archetype-badge {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #C89B5E;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            box-shadow: 0 4px 16px rgba(200, 155, 94, 0.4);
+        }
+        
+        .archetype-name {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .archetype-subtitle {
+            font-size: 18px;
+            color: #C89B5E;
+            margin-bottom: 24px;
+        }
+        
+        .archetype-description {
+            font-size: 16px;
+            color: #3A3A3A;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+        
+        .strengths-warnings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .section-heading {
+            font-size: 20px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        
+        .strength-list, .warning-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .strength-list li, .warning-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        
+        .checkmark-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #C89B5E;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 12px;
+        }
+        
+        .warning-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #9FB4B3;
+            flex-shrink: 0;
+        }
+        
+        .divider {
+            height: 1px;
+            background: #9FB4B3;
+            margin: 40px 0;
+        }
+        
+        /* Archetype Map */
+        .archetype-map {
+            margin-top: 40px;
+        }
+        
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            margin: 24px auto;
+            background: rgba(242, 235, 217, 0.05);
+            border: 1px solid #F2EBD9;
+            border-radius: 4px;
+        }
+        
+        .axis {
+            position: absolute;
+            background: #9FB4B3;
+        }
+        
+        .axis-horizontal {
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+        }
+        
+        .axis-vertical {
+            left: 50%;
+            top: 0;
+            width: 1px;
+            height: 100%;
+        }
+        
+        .axis-label {
+            position: absolute;
+            font-size: 11px;
+            color: #3A3A3A;
+            white-space: nowrap;
+        }
+        
+        .label-top {
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .label-bottom {
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .label-left {
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .label-right {
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .archetype-node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .archetype-node.current {
+            width: 80px;
+            height: 80px;
+            background: #C89B5E;
+            font-size: 32px;
+            box-shadow: 0 4px 16px rgba(200, 155, 94, 0.4);
+        }
+        
+        .archetype-node.other {
+            width: 50px;
+            height: 50px;
+            background: #9FB4B3;
+            font-size: 20px;
+        }
+        
+        .node-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 6px;
+            font-size: 11px;
+            color: #2D2424;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        
+        /* CTA Box */
+        .cta-box {
+            background: rgba(242, 235, 217, 0.3);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 40px;
+        }
+        
+        .cta-box h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        
+        .cta-box p {
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-btn.primary {
+            background: #C89B5E;
+            color: white;
+            border: none;
+        }
+        
+        .cta-btn.primary:hover {
+            background: #B8895A;
+        }
+        
+        .cta-btn.secondary {
+            background: white;
+            color: #3A3A3A;
+            border: 1px solid #9FB4B3;
+        }
+        
+        .cta-btn.secondary:hover {
+            background: #F2EBD9;
+        }
+        
+        /* Spider Web Chart */
+        .spider-web-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .spider-web-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            justify-content: center;
+        }
+        
+        .spider-web {
+            position: relative;
+            flex: 1;
+            max-width: 500px;
+        }
+        
+        .spider-web svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .spider-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 180px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        
+        .legend-label {
+            font-family: 'Palatino Linotype', Palatino, serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #2D2424;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 768px) {
+            .spider-web-wrapper {
+                flex-direction: column;
+            }
+            
+            .spider-legend {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .quiz-card {
+                padding: 24px;
+            }
+            
+            .card-quiz-header h2 {
+                font-size: 28px;
+            }
+            
+            .card-question {
+                font-size: 20px;
+            }
+            
+            .archetype-name {
+                font-size: 24px;
+            }
+            
+            .strengths-warnings-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .map-container {
+                max-width: 300px;
+                height: 300px;
+            }
+            
+            .archetype-node.current {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .archetype-node.other {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .spider-web-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="card-quiz-section">
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="intro-screen">
+            <div class="intro-content">
+                <h2>The 360° Digital Product Management Profile</h2>
+                
+                <p class="intro-text">
+                    This self-assessment helps you spot which behaviors you default to as a Digital Product Manager across the three lenses of great products: <strong>desirability, feasibility, and viability</strong>.
+                </p>
+                
+                <div class="intro-highlights">
+                    <h3>What to Expect</h3>
+                    <ul>
+                        <li>Answer 9 realistic scenarios, each with four choices</li>
+                        <li>Each choice maps to one of nine PM personas</li>
+                        <li>Takes approximately 5 minutes to complete</li>
+                        <li>There are no right or wrong answers</li>
+                    </ul>
+                </div>
+                
+                <p class="intro-text">
+                    Your selections indicate the behaviors you default to under typical conditions. At the end, you'll see a score from 0-4 for every persona, showing where you lead most often (your strengths) and where you lead less (your development opportunities).
+                </p>
+                
+                <p class="intro-text">
+                    Use this to understand your dominant lens preferences and strongest "PM-led" style. By knowing this, you are able to identify growth areas and where to develop next.
+                </p>
+                
+                <button class="start-btn" onclick="startAssessment()">Start Assessment →</button>
+            </div>
+        </div>
+        
+        <!-- Quiz Container (hidden initially) -->
+        <div id="quiz-container" class="card-quiz-container hidden">
+            <div class="card-quiz-header">
+                <h2>The 360° Digital Product Management Profile</h2>
+                <p style="font-size: 16px; color: #3A3A3A;">Answer based on your actual behavior in these scenarios</p>
+            </div>
+            
+            <div class="cards-wrapper">
+                <div class="cards-container" id="cards-container"></div>
+            </div>
+            
+            <div class="pagination-dots" id="card-pagination"></div>
+        </div>
+    </section>
+    
+    <script>
+        // Quiz questions
+        const questions = [
+            {
+                question: "Kicking off a new idea, I first:",
+                options: [
+                    { text: "Interview users to surface real problems.", persona: "The Explorer" },
+                    { text: "Sketch flows and build a quick prototype.", persona: "The Designer" },
+                    { text: "Define metrics and plan an experiment.", persona: "The Growth Driver" },
+                    { text: "Check integration constraints and risks.", persona: "The Orchestrator" }
+                ]
+            },
+            {
+                question: "When turning strategy into a quarter plan, I primarily:",
+                options: [
+                    { text: "Shape a pricing/packaging hypothesis with finance and sales.", persona: "The Commercial Catalyst" },
+                    { text: "Break work into increments and map cross-team dependencies.", persona: "The Orchestrator" },
+                    { text: "Choose enabling tech and instrumentation to de-risk scale.", persona: "The Tech Adopter" },
+                    { text: "Select bets that strengthen our multi-year position.", persona: "The Product Leader" }
+                ]
+            },
+            {
+                question: "Facing stakeholder disagreement, I:",
+                options: [
+                    { text: "Craft a compelling narrative and demo to align minds.", persona: "The Storyteller" },
+                    { text: "Publish a transparent plan with roles, risks, and dates.", persona: "The Solution Provider" },
+                    { text: "Show data from quick tests to settle the debate.", persona: "The Growth Driver" },
+                    { text: "Facilitate discovery interviews to re-ground in user needs.", persona: "The Explorer" }
+                ]
+            },
+            {
+                question: "Deciding on architecture for a new capability, I:",
+                options: [
+                    { text: "Select scalable patterns and instrument performance early.", persona: "The Tech Adopter" },
+                    { text: "Stress-test the approach against delivery timelines and resources.", persona: "The Solution Provider" },
+                    { text: "Consider long-term platform bets and portfolio leverage.", persona: "The Product Leader" },
+                    { text: "Align dependent teams and sequence integrations.", persona: "The Orchestrator" }
+                ]
+            },
+            {
+                question: "A key KPI starts trending down; I first:",
+                options: [
+                    { text: "Frame a story of what's happening and our hypotheses to align action, then test.", persona: "The Storyteller" },
+                    { text: "Talk to users and review session evidence to uncover root causes.", persona: "The Explorer" },
+                    { text: "Inspect usability and tune critical interactions to remove friction.", persona: "The Designer" },
+                    { text: "Reassess pricing, packaging, and positioning for possible market shifts.", persona: "The Commercial Catalyst" }
+                ]
+            },
+            {
+                question: "To improve delivery predictability, I focus on:",
+                options: [
+                    { text: "Clarifying acceptance criteria and unblocking teams daily.", persona: "The Solution Provider" },
+                    { text: "Track a few key numbers, try small fixes each sprint, and prioritize what moves them fastest.", persona: "The Growth Driver" },
+                    { text: "Simplifying flows and scope to ship a coherent experience.", persona: "The Designer" },
+                    { text: "Introducing tooling/telemetry that surfaces risks earlier.", persona: "The Tech Adopter" }
+                ]
+            },
+            {
+                question: "When the market shifts, I:",
+                options: [
+                    { text: "Reframe our north star and make bold, directional choices.", persona: "The Product Leader" },
+                    { text: "Run rapid growth experiments to validate new demand pockets.", persona: "The Growth Driver" },
+                    { text: "Craft a clear change narrative - why it matters, who's affected, and what we'll do now.", persona: "The Storyteller" },
+                    { text: "Redesign key touchpoints to match changed user expectations.", persona: "The Designer" }
+                ]
+            },
+            {
+                question: "Evaluating a controversial feature request, I:",
+                options: [
+                    { text: "Map jobs-to-be-done and prototype quickly to learn.", persona: "The Explorer" },
+                    { text: "Assess delivery costs, scope, and plan a realistic release.", persona: "The Solution Provider" },
+                    { text: "Analyze ARR/LTV and packaging potential before committing.", persona: "The Commercial Catalyst" },
+                    { text: "Consider platform strategy and long-term differentiation.", persona: "The Product Leader" }
+                ]
+            },
+            {
+                question: "Communicating direction to execs and teams, I lead with:",
+                options: [
+                    { text: "A clear narrative that creates shared understanding and momentum.", persona: "The Storyteller" },
+                    { text: "A roadmap anchored in dependencies, milestones, and ownership.", persona: "The Orchestrator" },
+                    { text: "A tech strategy outlining architecture choices and telemetry.", persona: "The Tech Adopter" },
+                    { text: "A revenue narrative tying pricing/positioning to growth targets.", persona: "The Commercial Catalyst" }
+                ]
+            }
+        ];
+        
+        // Persona data
+        const personas = {
+            "The Designer": {
+                subtitle: "Design-led",
+                icon: "✏️",
+                lens: "Desirability",
+                level: "Pragmatic",
+                fiveWords: "iterative, human-centered, empathetic, meticulous, clear",
+                description: "Leads with design quality and usability as the primary decision lens. Crafts simple, delightful user flows, tests usability, iterates on onboarding and micro-interactions to elevate experience quality. Excels at translating insights into clear solutions and raising product quality bars.",
+                traits: [
+                    "You start with 'what's the best experience?'",
+                    "You prototype, test usability, and polish flows.",
+                    "You're happiest when the product feels simple and clear.",
+                    "If forced to choose, you prefer experience over extra features."
+                ]
+            },
+            "The Storyteller": {
+                subtitle: "Narrative-led",
+                icon: "📖",
+                lens: "Desirability",
+                level: "Core",
+                fiveWords: "persuasive, clear narrative, inspiring, audience-aware, focused",
+                description: "Leads with narrative as the primary force for momentum. Converts insights into crisp narratives, demos, and messaging that align with the resonant customer segments. Strong at persuasion, internal alignment, and accelerating decisions through shared understanding.",
+                traits: [
+                    "You turn ideas into a clear story everyone understands.",
+                    "You use demos and messaging to align teams and persuade.",
+                    "You judge success by whether people 'get it' and rally behind it.",
+                    "If stuck, you improve the narrative first."
+                ]
+            },
+            "The Explorer": {
+                subtitle: "Discovery-led",
+                icon: "🔍",
+                lens: "Desirability",
+                level: "Visionary",
+                fiveWords: "curious, hypothesis-driven, inquisitive, user-first, iterative",
+                description: "Leads with continuous discovery to de-risk and sharpen problem definitions. Engages users frequently, frames jobs-to-be-done, prototypes quickly, and validates assumptions before committing. Great at uncovering user needs, sharpening problem statements, and de-risking early bets through evidence.",
+                traits: [
+                    "You talk to users early and often and map jobs-to-be-done.",
+                    "You test assumptions with quick experiments before committing.",
+                    "You judge success by whether the problem is clearer than the solution at first.",
+                    "If unsure, you say 'let's learn before we build.'"
+                ]
+            },
+            "The Solution Provider": {
+                subtitle: "Delivery-led",
+                icon: "🚀",
+                lens: "Feasibility",
+                level: "Pragmatic",
+                fiveWords: "pragmatic, delivery-focused, resilient, decisive, hands-on",
+                description: "Leads with delivery and shipping value under constraints. Removes blockers, sequences work pragmatically, makes pragmatic trade-offs, and ships reliably. Great at turning intent into executable plans and generating momentum under tight constraints.",
+                traits: [
+                    "You remove blockers and ship reliably under constraints.",
+                    "You break work into clear, shippable pieces.",
+                    "You prefer pragmatic choices over perfect ones.",
+                    "If timelines slip, you re-scope to keep momentum."
+                ]
+            },
+            "The Orchestrator": {
+                subtitle: "Alignment-led",
+                icon: "🎯",
+                lens: "Feasibility",
+                level: "Core",
+                fiveWords: "structured, transparency-driven, coordinator, accountable, integrative",
+                description: "Leads with stakeholder alignment to convert strategy into increments. Coordinates stakeholders, dependencies and keeps a prioritized backlog that lines the strategy up with executable increments. Outstanding at cross-team alignment, sequencing work, change and enterprise adoption.",
+                traits: [
+                    "You connect teams, manage dependencies, and keep one plan.",
+                    "You make priorities explicit and visible.",
+                    "You measure success by smooth handoffs and few surprises.",
+                    "If conflict appears, you create structure and shared agreements."
+                ]
+            },
+            "The Tech Adopter": {
+                subtitle: "Tech-led",
+                icon: "⚙️",
+                lens: "Feasibility",
+                level: "Visionary",
+                fiveWords: "data-savvy, early-adopter, future-proofing, architectural, enabling",
+                description: "Leads with technology and platform data to enable scalable solutions early. Sets technical direction, adopts enabling tech early, validates approaches with architecture and data, and frames components. Excels at architecture choices, scalability, performance, and reducing long-term technical risk.",
+                traits: [
+                    "You lean on architecture, data, and platforms to guide choices.",
+                    "You adopt enabling tech early to unlock speed later.",
+                    "You think about scalability, reliability, and performance first.",
+                    "If options are fuzzy, you run a technical spike or add telemetry."
+                ]
+            },
+            "The Growth Driver": {
+                subtitle: "Opportunity-led",
+                icon: "📈",
+                lens: "Viability",
+                level: "Pragmatic",
+                fiveWords: "experimental, metric-centric, scalable, hands-on, quick",
+                description: "Leads with growth opportunities revealed through metrics and rapid experiments. Runs rapid experiments, tunes funnels, and builds loops to lift acquisition, activation and retention. Strong at converting metrics into momentum and compounding growth.",
+                traits: [
+                    "You hunt for levers in the funnel: acquire, activate, retain.",
+                    "You run rapid A/B tests and double down on what moves metrics.",
+                    "You speak in conversion rates, lift, and loops.",
+                    "If you have one week, you choose the fastest experiment with impact."
+                ]
+            },
+            "The Commercial Catalyst": {
+                subtitle: "Revenue-led",
+                icon: "💰",
+                lens: "Viability",
+                level: "Core",
+                fiveWords: "analytical, revenue-oriented, value, market-savvy, inventive",
+                description: "Leads with monetization mechanics and readiness to convert value into revenue. Designs go-to-market blueprint: pricing, packaging, positioning, and collaborates with sales and finance to test and scale revenue. Strong at revenue mechanics and translating features into sustainable business models.",
+                traits: [
+                    "You focus on pricing, packaging, and a repeatable go-to-market.",
+                    "You collaborate: optimize the existing product.",
+                    "You choose features that strengthen the business model.",
+                    "If trade-offs emerge, you ask 'what generates the most revenue?'"
+                ]
+            },
+            "The Product Leader": {
+                subtitle: "Long-term-led",
+                icon: "🌟",
+                lens: "Viability",
+                level: "Visionary",
+                fiveWords: "strategic, visionary, bold, influential, directional",
+                description: "Leads with north-star vision and durable advantage over short-term wins. Sets the north star and big bets, reads market shifts, and aligns executives and teams to the big decision themes. Excellent at portfolio choices, portfolio shaping, and directional clarity.",
+                traits: [
+                    "You set a clear north star and make bold, multi-year bets.",
+                    "You shape the portfolio, not just the next release.",
+                    "You read market shifts and make decisive directional calls.",
+                    "If pressured short-term, you protect long-term advantage."
+                ]
+            }
+        };
+        
+        let currentStep = 0;
+        let answers = [];
+        let assessmentStarted = false;
+        
+        function init() {
+            // Show intro screen, don't render cards yet
+            document.getElementById('intro-screen').classList.remove('hidden');
+            document.getElementById('quiz-container').classList.add('hidden');
+        }
+        
+        function startAssessment() {
+            assessmentStarted = true;
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            renderCards();
+            updatePagination();
+        }
+        
+        function renderCards() {
+            const container = document.getElementById('cards-container');
+            
+            const cards = questions.map((q, qIndex) => `
+                <div class="quiz-card ${qIndex === currentStep ? 'active' : ''}">
+                    <div class="question-number">${qIndex + 1}</div>
+                    <div class="card-question">${q.question}</div>
+                    <div class="chip-options">
+                        ${q.options.map((opt, i) => `
+                            <button class="chip-btn ${answers[qIndex] === i ? 'selected' : ''}" 
+                                    onclick="selectOption(${qIndex}, ${i})">${opt.text}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            const resultCard = currentStep >= questions.length ? renderResult() : '';
+            
+            container.innerHTML = cards + resultCard;
+            container.style.transform = `translateX(-${currentStep * 100}%)`;
+        }
+        
+        function selectOption(qIndex, optIndex) {
+            answers[qIndex] = optIndex;
+            
+            if (qIndex === currentStep && currentStep < questions.length - 1) {
+                setTimeout(() => {
+                    currentStep++;
+                    renderCards();
+                    updatePagination();
+                }, 300);
+            } else if (qIndex === currentStep && currentStep === questions.length - 1) {
+                setTimeout(() => {
+                    currentStep++;
+                    renderCards();
+                    updatePagination();
+                }, 300);
+            } else {
+                renderCards();
+            }
+        }
+        
+        function updatePagination() {
+            const pagination = document.getElementById('card-pagination');
+            const totalDots = questions.length + 1;
+            
+            pagination.innerHTML = Array(totalDots).fill(0).map((_, i) => `
+                <div class="pagination-dot ${i === currentStep ? 'active' : ''}" 
+                     onclick="goToCard(${i})"></div>
+            `).join('');
+        }
+        
+        function goToCard(index) {
+            currentStep = index;
+            renderCards();
+            updatePagination();
+        }
+        
+        function renderResult() {
+            const scores = calculateScores();
+            const topPersonas = getTopPersonas(scores);
+            
+            return `
+                <div class="quiz-card active">
+                    <div class="result-card">
+                        <h2 style="font-size: 32px; margin-bottom: 32px;">Your 360° Digital Product Management Profile</h2>
+                        
+                        <div class="spider-web-container">
+                            <div class="spider-web-wrapper">
+                                <div class="spider-web">
+                                    ${generateSpiderWeb(scores)}
+                                </div>
+                                <div class="spider-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #451F23;"></div>
+                                        <div class="legend-label">DESIRABILITY</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #E4B73C;"></div>
+                                        <div class="legend-label">FEASIBILITY</div>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: #67817F;"></div>
+                                        <div class="legend-label">VIABILITY</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        
+                        <h3 style="font-family: 'Palatino Linotype', Palatino, serif; font-size: 24px; margin-bottom: 24px; text-align: center; color: #2D2424;">
+                            Your Top Personas
+                        </h3>
+                        
+                        ${topPersonas.map((item, index) => {
+                            const data = personas[item.name];
+                            return `
+                                <div style="margin-bottom: ${index === 0 ? '48px' : '32px'}; ${index === 0 ? 'border-bottom: 1px solid #9FB4B3; padding-bottom: 48px;' : ''}">
+                                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                                        <div class="archetype-badge" style="width: 80px; height: 80px; font-size: 32px; margin: 0;">
+                                            ${data.icon}
+                                        </div>
+                                        <div style="text-align: left;">
+                                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 4px;">
+                                                <h3 style="font-family: 'Palatino Linotype', Palatino, serif; font-size: ${index === 0 ? '28px' : '24px'}; margin: 0; color: #2D2424;">
+                                                    ${item.name}
+                                                </h3>
+                                                <span style="background: #C89B5E; color: white; padding: 4px 12px; border-radius: 12px; font-size: 14px; font-weight: 600;">
+                                                    ${item.score} points
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 14px; color: #3A3A3A; margin-bottom: 4px;">
+                                                ${data.subtitle}
+                                            </div>
+                                            <div style="font-size: 15px; color: #C89B5E; font-weight: 600;">
+                                                ${data.fiveWords}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <p style="font-size: 15px; color: #3A3A3A; margin-bottom: 16px; text-align: left; line-height: 1.6;">
+                                        ${data.description}
+                                    </p>
+                                    
+                                    <div style="background: rgba(242, 235, 217, 0.3); border-radius: 6px; padding: 16px; margin-bottom: 16px;">
+                                        <h4 style="font-family: 'Palatino Linotype', Palatino, serif; font-size: 16px; margin-bottom: 12px; color: #2D2424;">
+                                            Behavioral Traits
+                                        </h4>
+                                        <ul style="list-style: none; padding: 0; margin: 0;">
+                                            ${data.traits.map(trait => `
+                                                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 14px; color: #3A3A3A;">
+                                                    <span style="color: #C89B5E; font-size: 16px;">•</span>
+                                                    <span>${trait}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                        
+                        <div class="divider"></div>
+                        
+                        <div style="background: rgba(242, 235, 217, 0.2); border-radius: 8px; padding: 24px; margin-bottom: 32px;">
+                            <h3 style="font-family: 'Palatino Linotype', Palatino, serif; font-size: 20px; margin-bottom: 16px; text-align: left;">
+                                How to Interpret Your Results
+                            </h3>
+                            <div style="text-align: left; font-size: 14px; color: #3A3A3A; line-height: 1.7;">
+                                <p style="margin-bottom: 12px;">
+                                    <strong style="color: #2D2424;">3–4 points for a persona</strong> = this is your main style. You use it first, especially under pressure.
+                                </p>
+                                <p style="margin-bottom: 12px;">
+                                    <strong style="color: #2D2424;">2 points</strong> = you can work this way when needed, but it's not your default.
+                                </p>
+                                <p style="margin: 0;">
+                                    <strong style="color: #2D2424;">0–1 point</strong> = you rarely use this style. It's a growth area, not a failure.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; border: 1px solid #9FB4B3; border-radius: 8px; padding: 20px; margin-bottom: 32px;">
+                            <h3 style="font-family: 'Palatino Linotype', Palatino, serif; font-size: 18px; margin-bottom: 16px; text-align: left;">
+                                All Persona Scores
+                            </h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                                ${Object.entries(scores).sort((a, b) => b[1] - a[1]).map(([name, score]) => `
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: ${score >= 3 ? 'rgba(200, 155, 94, 0.1)' : 'rgba(159, 180, 179, 0.05)'}; border-radius: 4px;">
+                                        <span style="font-size: 14px; color: #2D2424;">${personas[name].icon} ${name}</span>
+                                        <span style="font-weight: 600; color: ${score >= 3 ? '#C89B5E' : '#3A3A3A'}; font-size: 14px;">${score}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="cta-box">
+                            <h3>Ready to level up?</h3>
+                            <p>Our Product Management Mastery course is designed for PMs like you. Learn frameworks to leverage your strengths, overcome your blind spots, and ship products users love.</p>
+                            <div class="cta-buttons">
+                                <a href="#" class="cta-btn primary">Explore the Course →</a>
+                                <button class="cta-btn secondary" onclick="resetQuiz()">Retake Assessment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function calculateScores() {
+            const scores = {};
+            
+            // Initialize all personas with 0
+            Object.keys(personas).forEach(name => {
+                scores[name] = 0;
+            });
+            
+            // Count selections
+            answers.forEach((answerIndex, questionIndex) => {
+                const selectedPersona = questions[questionIndex].options[answerIndex].persona;
+                scores[selectedPersona]++;
+            });
+            
+            return scores;
+        }
+        
+        function getTopPersonas(scores) {
+            return Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 2)
+                .map(([name, score]) => ({ name, score }));
+        }
+        
+        function generateSpiderWeb(scores) {
+            const size = 600;
+            const center = size / 2;
+            const radius = 220;
+            const levels = 4; // 0-4 points, showing lines at 1, 2, 3, 4
+            
+            // Define persona order (clockwise from top)
+            const personaOrder = [
+                { name: "Explorer", fullName: "The Explorer", lens: "Desirability", color: "#451F23" },
+                { name: "Storyteller", fullName: "The Storyteller", lens: "Desirability", color: "#451F23" },
+                { name: "Designer", fullName: "The Designer", lens: "Desirability", color: "#451F23" },
+                { name: "Solution Provider", fullName: "The Solution Provider", lens: "Feasibility", color: "#E4B73C" },
+                { name: "Orchestrator", fullName: "The Orchestrator", lens: "Feasibility", color: "#E4B73C" },
+                { name: "Tech Adopter", fullName: "The Tech Adopter", lens: "Feasibility", color: "#E4B73C" },
+                { name: "Commercial Catalyst", fullName: "The Commercial Catalyst", lens: "Viability", color: "#67817F" },
+                { name: "Product Leader", fullName: "The Product Leader", lens: "Viability", color: "#67817F" },
+                { name: "Growth Driver", fullName: "The Growth Driver", lens: "Viability", color: "#67817F" }
+            ];
+            
+            const angleStep = (2 * Math.PI) / 9;
+            const startAngle = -Math.PI / 2; // Start at top
+            
+            // Generate colored background segments
+            let coloredSegments = '';
+            personaOrder.forEach((persona, i) => {
+                const angle1 = startAngle + (i * angleStep);
+                const angle2 = startAngle + ((i + 1) * angleStep);
+                
+                const x1 = center + radius * Math.cos(angle1);
+                const y1 = center + radius * Math.sin(angle1);
+                const x2 = center + radius * Math.cos(angle2);
+                const y2 = center + radius * Math.sin(angle2);
+                
+                const pathData = `M ${center} ${center} L ${x1} ${y1} A ${radius} ${radius} 0 0 1 ${x2} ${y2} Z`;
+                
+                coloredSegments += `<path d="${pathData}" fill="${persona.color}" opacity="0.7"/>`;
+            });
+            
+            // Generate concentric circles
+            let circles = '';
+            for (let i = 1; i <= levels; i++) {
+                const r = (radius / levels) * i;
+                circles += `<circle cx="${center}" cy="${center}" r="${r}" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>`;
+            }
+            
+            // Generate segment dividers
+            let segments = '';
+            personaOrder.forEach((persona, i) => {
+                const angle = startAngle + (i * angleStep);
+                const x1 = center;
+                const y1 = center;
+                const x2 = center + radius * Math.cos(angle);
+                const y2 = center + radius * Math.sin(angle);
+                
+                segments += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="white" stroke-width="2" opacity="0.6"/>`;
+            });
+            
+            // Generate score polygon
+            let scorePoints = [];
+            personaOrder.forEach((persona, i) => {
+                const score = scores[persona.fullName] || 0;
+                const angle = startAngle + (i * angleStep);
+                const r = (radius / 4) * score; // Scale: 4 points = full radius
+                const x = center + r * Math.cos(angle);
+                const y = center + r * Math.sin(angle);
+                scorePoints.push(`${x},${y}`);
+            });
+            
+            const scorePolygon = `<polygon points="${scorePoints.join(' ')}" 
+                fill="rgba(242, 235, 217, 0.6)" 
+                stroke="#C89B5E" 
+                stroke-width="3"/>`;
+            
+            // Generate score dots
+            let scoreDots = '';
+            personaOrder.forEach((persona, i) => {
+                const score = scores[persona.fullName] || 0;
+                if (score > 0) {
+                    const angle = startAngle + (i * angleStep);
+                    const r = (radius / 4) * score;
+                    const x = center + r * Math.cos(angle);
+                    const y = center + r * Math.sin(angle);
+                    
+                    scoreDots += `<circle cx="${x}" cy="${y}" r="6" fill="#C89B5E" stroke="white" stroke-width="2.5"/>`;
+                }
+            });
+            
+            // Generate persona labels at OUTER edge of segments
+            let personaLabels = '';
+            personaOrder.forEach((persona, i) => {
+                const angle = startAngle + (i * angleStep) + (angleStep / 2);
+                const labelRadius = radius + 45; // Further outside the circle for better readability
+                const labelX = center + labelRadius * Math.cos(angle);
+                const labelY = center + labelRadius * Math.sin(angle);
+                
+                const rotation = (angle * 180 / Math.PI) + 90;
+                
+                // Add white background rectangle for better contrast
+                const rectWidth = 85;
+                const rectHeight = 18;
+                
+                personaLabels += `
+                    <rect x="${labelX - rectWidth/2}" y="${labelY - rectHeight/2}" 
+                        width="${rectWidth}" height="${rectHeight}" 
+                        fill="white" opacity="0.9" rx="3"
+                        transform="rotate(${rotation}, ${labelX}, ${labelY})"
+                    />
+                    <text x="${labelX}" y="${labelY}" 
+                        text-anchor="middle" 
+                        dominant-baseline="middle" 
+                        fill="#2D2424" 
+                        font-size="12" 
+                        font-weight="700"
+                        font-family="Arial, sans-serif"
+                        transform="rotate(${rotation}, ${labelX}, ${labelY})"
+                    >${persona.name}</text>
+                `;
+            });
+            
+            return `
+                <svg viewBox="0 0 ${size} ${size}" style="max-width: 100%;">
+                    <circle cx="${center}" cy="${center}" r="${radius + 10}" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+                    ${coloredSegments}
+                    ${circles}
+                    ${segments}
+                    ${scorePolygon}
+                    ${scoreDots}
+                    ${personaLabels}
+                </svg>
+            `;
+        }
+        
+        function resetQuiz() {
+            currentStep = 0;
+            answers = [];
+            assessmentStarted = false;
+            document.getElementById('intro-screen').classList.remove('hidden');
+            document.getElementById('quiz-container').classList.add('hidden');
+        }
+        
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
